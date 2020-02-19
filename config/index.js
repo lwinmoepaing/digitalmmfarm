@@ -9,11 +9,11 @@ console.log(env)
 
 const config = {
 	development: {
-		API_VERSION: '/api/1',
+		API_VERSION: '/api/v1',
 		API_KEY: process.env.API_KEY,
 	},
 	production: {
-		API_VERSION: '/api/1',
+		API_VERSION: '/api/v1',
 		API_KEY: process.env.API_KEY,
 	}
 }
