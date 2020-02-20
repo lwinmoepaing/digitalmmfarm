@@ -3,11 +3,18 @@ const app = express()
 const morgan = require('morgan')
 const helmet = require('helmet')
 const cors = require('cors')
+// const passport = require('passport')
 
 // Self Modules
 const config = require('./config')
 const errorHandler = require('./lib/errorHandler')
 const ApiRouter = require('./router')
+
+// Dotenv (.env) Configuration
+require('dotenv').config()
+
+// Require Passport
+require('./services/passport')
 
 /**
  * Config middlware
@@ -20,8 +27,7 @@ app.use(cors())
 // Like Body Parser
 app.use(express.json())
 
-// Dotenv (.env) Configuration
-require('dotenv').config()
+
 
 // Logger for Developing
 if (process.env.ENV_NODE !== 'production') {

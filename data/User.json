@@ -1,0 +1,30 @@
+[
+	{
+		"_id": 1,
+		"name": "Lwin Moe Paing",
+		"password": "123",
+		"age": 23,
+		"role": "Admin"
+	},
+	{
+		"_id": 2,
+		"name": "Kaung Thu Lin",
+		"password": "123",
+		"age": 22,
+		"role": "Staff"
+	},
+	{
+		"_id": 3,
+		"name": "Min ArKar Soe",
+		"password": "123",
+		"age": 22,
+		"role": "Farmer"
+	},
+	{
+		"_id": 4,
+		"name": "Htet Naing Lin",
+		"password": "123",
+		"age": 24,
+		"role": "User"
+	}
+]
