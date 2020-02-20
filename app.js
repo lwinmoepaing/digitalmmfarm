@@ -10,10 +10,11 @@ const passport = require('passport')
 const config = require('./config')
 const errorHandler = require('./lib/errorHandler')
 const ApiRouter = require('./router')
+const connectDb = require('./services/dbConnect')
+connectDb()
 
 // Dotenv (.env) Configuration
 require('dotenv').config()
-
 // Require Locale Passport Config
 require('./services/passport')(passport)
 

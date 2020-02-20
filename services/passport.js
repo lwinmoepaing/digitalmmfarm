@@ -30,7 +30,11 @@ module.exports = (passport) => {
 		usernameField: 'email',
 		passwordField: 'password'
 	}
-
+	/**
+	 * @desc: When User Login ( Authentication )
+	 * @route 'api/v{number}/auth'
+	 * @method POST
+	 */
 	const PassportManage = async (email, password, cb) => {
 		//this one is typically a DB call. Assume that the returned user object is pre-formatted and ready for storing in JWT
 		const user = await User.find(user => user.name === email && user.password === password)
