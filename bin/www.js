@@ -1,6 +1,12 @@
 const http = require('http')
-const app = require('../app')
+const fs = require('fs')
+// Create Logs Directory If Not Exist
+var dir = __dirname + '/../logs'
+if (!fs.existsSync(dir)){
+	fs.mkdirSync(dir)
+}
 
+const app = require('../app')
 const port = normalizePort(process.env.PORT || '3000')
 
 /**

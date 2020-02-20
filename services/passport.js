@@ -30,6 +30,7 @@ module.exports = (passport) => {
 		usernameField: 'email',
 		passwordField: 'password'
 	}
+
 	/**
 	 * @desc: When User Login ( Authentication )
 	 * @route 'api/v{number}/auth'
