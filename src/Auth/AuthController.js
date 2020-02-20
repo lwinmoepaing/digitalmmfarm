@@ -61,10 +61,26 @@ module.exports.LOGIN_USER = async (req, res) => {
 		}
 		req.login(user, {session: false}, (err) => {
 			if (err) { res.status(400).json(errorResponse(err)) }
-			const { _id, role, name, email } = user
-			const data = { _id, role, name, email }
+			// Filters Data
+			const { _id, role, name, email, skills } = user
+			const data = { _id, role, name, email, skills }
+			// Set JWT Token
 			const token = jwt.sign(data, JWT_SECRET)
 			return res.json({ ...successResponse(data), token})
 		})
 	})(req, res)
+}
+
+
+/**
+ * GET Profile Data
+ */
+
+module.exports.GET_PROFILE_DATA = async (req, res) => {
+	try {
+		const user = await User.findOne({ email: req.user.email })
+		res.json(successResponse(user))
+	} catch (e) {
+		res.json(errorResponse(e))
+	}
 }
