@@ -1,6 +1,5 @@
 const express = require('express')
 const app = express()
-const morgan = require('morgan')
 const helmet = require('helmet')
 const cors = require('cors')
 const bodyParser = require('body-parser')
@@ -10,14 +9,19 @@ const passport = require('passport')
 const config = require('./config')
 const errorHandler = require('./lib/errorHandler')
 const ApiRouter = require('./router')
+// Importing Services
 const connectDb = require('./services/dbConnect')
-connectDb()
+const Logger = require('./services/logger')
 
 // Dotenv (.env) Configuration
 require('dotenv').config()
 // Require Locale Passport Config
 require('./services/passport')(passport)
 
+// Connect To Database
+connectDb()
+// Use Logger
+app.use(Logger)
 // For setting various HTTP headers.
 // It's not a silver bullet, but it can help!
 app.use(helmet())
@@ -27,10 +31,6 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
-// Logger for Developing
-if (process.env.ENV_NODE !== 'production') {
-	app.use(morgan('tiny'))
-}
 
 /**
  * Testing Initial API ROUTE
@@ -42,7 +42,7 @@ app.get('/', (req, res) => {
 		success: true,
 		author: 'Lwin Moe Paing'
 	}
-	res.status(200).json(message)
+	res.status(201).json(message)
 })
 
 /**
