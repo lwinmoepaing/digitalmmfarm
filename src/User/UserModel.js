@@ -29,6 +29,8 @@ const userSchema = new Schema({
 		enum: ['Admin', 'Staff', 'Farmer', 'User'],
 		default: 'User'
 	}
+}, {
+	timestamps: true
 })
 
 // Create a User model for the schema

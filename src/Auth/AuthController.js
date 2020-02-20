@@ -23,7 +23,7 @@ module.exports.CREATE_USER = async (req, res) => {
 	try {
 		const isExistUser = await User.findOne({email: req.body.email })
 		if(isExistUser) {
-			res.status(400).json(errorResponse({message: 'Your email is Already Registered'}))
+			throw new Error('Your email is Already Registered')
 		}
 
 		const salt = await bcrypt.genSalt(10)
@@ -39,7 +39,7 @@ module.exports.CREATE_USER = async (req, res) => {
 		)
 	}
 	catch (e) {
-		res.status(500).json(errorResponse(e))
+		res.status(400).json(errorResponse(e))
 	}
 }
 
@@ -79,6 +79,7 @@ module.exports.LOGIN_USER = async (req, res) => {
 module.exports.GET_PROFILE_DATA = async (req, res) => {
 	try {
 		const user = await User.findOne({ email: req.user.email })
+		if(!user) res.json(errorResponse( new Error ('User Not Found ')))
 		res.json(successResponse(user))
 	} catch (e) {
 		res.json(errorResponse(e))
