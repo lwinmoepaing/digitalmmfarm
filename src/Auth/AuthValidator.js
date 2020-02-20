@@ -7,7 +7,6 @@ const { ROLES } = require('../../config')
 const Auth_Register_Validator = ({ body }) => {
 	const schema = Joi.object().keys({
 		name: Joi.string()
-			.alphanum()
 			.min(3)
 			.max(30)
 			.required(),

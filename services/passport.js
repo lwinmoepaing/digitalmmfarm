@@ -1,9 +1,10 @@
 //passport.js
-const User = require('../data/User.json')
+const User = require('../src/User/UserModel')
 const passportJWT = require('passport-jwt')
 const LocalStrategy = require('passport-local').Strategy
 const config = require('../config')
-const { DEEP_JSON_COPY } = require('../lib/helper')
+const bcrypt = require('bcrypt')
+// const { DEEP_JSON_COPY } = require('../lib/helper')
 
 const JWTStrategy   = passportJWT.Strategy
 const ExtractJWT = passportJWT.ExtractJwt
@@ -11,8 +12,8 @@ const ExtractJWT = passportJWT.ExtractJwt
 module.exports = (passport) => {
 
 	const JWT_MANAGE = async function (jwtPayload, cb) {
-		console.log('Jwt Payload', jwtPayload)
-		return jwtPayload._id ? cb(null, jwtPayload) : cb(new Error ('Hehe2'))
+		// console.log('Jwt Payload', jwtPayload)
+		return jwtPayload._id ? cb(null, jwtPayload) : cb(new Error ('Hehe2'), null, {message: 'Aww'})
 	}
 
 	const PassportJWTStrategy = ({
@@ -37,17 +38,20 @@ module.exports = (passport) => {
 	 * @method POST
 	 */
 	const PassportManage = async (email, password, cb) => {
-		//this one is typically a DB call. Assume that the returned user object is pre-formatted and ready for storing in JWT
-		const user = await User.find(user => user.name === email && user.password === password)
-		if(!user) {
-			return cb(null, false, {message: 'Incorrect email or password.'})
-		} else if(user) {
-			const getUser = DEEP_JSON_COPY(user)
-			// Don't Wanna Show User Password
-			delete getUser.password
-			return cb(null, getUser, {message: 'Logged In Successfully'})
-		} else {
-			return cb(new Error ('Hehe'))
+		try {
+			const user = await User.findOne({ email })
+			if (!user) return cb(new Error('Not Found User'), false,)
+
+			bcrypt.compare(password, user.password, (err, isMatch) => {
+				if (err) throw err
+				if(isMatch) {
+					return cb(null, user)
+				} else {
+					return cb(new Error('Incorrect Password'), false)
+				}
+			})
+		} catch (e) {
+			cb(new Error('Incorrect email or password.'), false)
 		}
 	}
 
