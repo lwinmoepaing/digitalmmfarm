@@ -3,7 +3,8 @@ const app = express()
 const morgan = require('morgan')
 const helmet = require('helmet')
 const cors = require('cors')
-// const passport = require('passport')
+const bodyParser = require('body-parser')
+const passport = require('passport')
 
 // Self Modules
 const config = require('./config')
@@ -13,21 +14,17 @@ const ApiRouter = require('./router')
 // Dotenv (.env) Configuration
 require('dotenv').config()
 
-// Require Passport
-require('./services/passport')
+// Require Locale Passport Config
+require('./services/passport')(passport)
 
-/**
- * Config middlware
- */
 // For setting various HTTP headers.
 // It's not a silver bullet, but it can help!
 app.use(helmet())
 // For Cross Origin Resource Sharing
 app.use(cors())
 // Like Body Parser
-app.use(express.json())
-
-
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
 
 // Logger for Developing
 if (process.env.ENV_NODE !== 'production') {
