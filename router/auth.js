@@ -4,6 +4,9 @@ const passport = require('passport')
 const jwt = require('jsonwebtoken')
 const { JWT_SECRET } = require('../config')
 
+// Controller
+const { CREATE_USER } = require('../controller/AuthController')
+
 const { successResponse, errorResponse } = require('../lib/responseHandler')
 
 /**
@@ -37,5 +40,10 @@ router.get('/', passport.authenticate('jwt', {session: false}), (req, res) => {
 	// const {authorization = null} = req.headers
 	res.json(successResponse(req.user))
 })
+
+/**
+ * @doc : Testing Create User
+ */
+router.post('/create', CREATE_USER)
 
 module.exports = router
