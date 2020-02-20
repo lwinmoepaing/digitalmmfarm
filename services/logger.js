@@ -19,4 +19,4 @@ morgan.token('user', (req) => {
 
 morgan.format('myformat', '[:date[clf]] :method ":url", Status :status, ContentLength :res[content-length] - :response-time ms, :user')
 
-module.exports = morgan('myformat', { stream: accessLogStream })
+module.exports = morgan('myformat', { format: 'default', stream: accessLogStream })

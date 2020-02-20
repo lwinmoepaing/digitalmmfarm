@@ -4,6 +4,7 @@ const helmet = require('helmet')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const passport = require('passport')
+const morgan = require('morgan')
 
 // Self Modules
 const config = require('./config')
@@ -21,7 +22,11 @@ require('./services/passport')(passport)
 // Connect To Database
 connectDb()
 // Use Logger
-app.use(Logger)
+if(process.env.NODE_ENV !== 'production') {
+	app.use(morgan('tiny'))
+} else {
+	app.use(Logger)
+}
 // For setting various HTTP headers.
 // It's not a silver bullet, but it can help!
 app.use(helmet())

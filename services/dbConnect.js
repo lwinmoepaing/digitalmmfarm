@@ -10,7 +10,8 @@ module.exports =function(){
 
 	const MONGO_OPTION = {
 		useUnifiedTopology: true,
-		useNewUrlParser: true
+		useNewUrlParser: true,
+		useCreateIndex: true
 	}
 
 	mongoose.connect(MONGO_URI, MONGO_OPTION)
