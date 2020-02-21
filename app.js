@@ -10,7 +10,8 @@ const routerEndPoints = require('express-list-endpoints')
 // Self Modules
 const config = require('./config')
 const errorHandler = require('./lib/errorHandler')
-const ApiRouter = require('./services/router')
+const ApiRouter = require('./services/ApiRouter')
+const WebRouter = require('./services/WebRouter')
 // Importing Services
 const connectDb = require('./services/dbConnect')
 const Logger = require('./services/logger')
@@ -52,9 +53,16 @@ app.get('/', (req, res) => {
 })
 
 /**
+ * SET WEB_ROUTER
+ * @doc : Using Express Middleware For Routing
+ * @directory : '/router/web/*'
+ */
+app.use(WebRouter)
+
+/**
  * SET API_ROUTER
  * @doc : Using Express Middleware For Routing
- * @directory : '/router/index.js'
+ * @directory : '/router/api/*'
  */
 app.use(config.API_VERSION, ApiRouter)
 

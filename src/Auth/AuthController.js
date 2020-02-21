@@ -14,7 +14,7 @@ const { Auth_Register_Validator, Auth_Login_Validator } = require('./AuthValidat
  */
 
 module.exports.CREATE_USER = async (req, res) => {
-	const {error} = await Auth_Register_Validator(req)
+	const { error } = await Auth_Register_Validator(req)
 
 	if(error) {
 		res.status(400).json( MANAGE_ERROR_MESSAGE(error) )

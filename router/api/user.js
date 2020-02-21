@@ -3,8 +3,8 @@ const passport = require('passport')
 const router = express.Router()
 
 // Importing Controller
-const AuthController = require('../src/Auth/AuthController')
-const UserController = require('../src/User/UserController')
+const AuthController = require('../../src/Auth/AuthController')
+const UserController = require('../../src/User/UserController')
 
 /**
  * Get User Info (Me)
