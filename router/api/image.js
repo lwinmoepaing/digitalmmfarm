@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const passport = require('passport')
 // Controller
+const { upload } = require('../../middleware/imageUpload')
 const ImageController = require('../../src/Image/ImageController')
 
 
@@ -11,6 +12,10 @@ const ImageController = require('../../src/Image/ImageController')
  * @route /api/v{Num}/auth/me
  */
 
-router.post('/', passport.authenticate('jwt', {session: false}), ImageController.CREATE_IMAGE)
+router.post('/',
+	passport.authenticate('jwt', {session: false}),
+	upload.single('image'),
+	ImageController.CREATE_IMAGE
+)
 
 module.exports = router

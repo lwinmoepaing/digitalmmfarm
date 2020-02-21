@@ -8,9 +8,8 @@ const { Schema } = mongoose
 const imageSchema = new Schema({
 	_id: {
 		type: String,
-		unique: true,
 	},
-	user: [{ type: Schema.Types.ObjectId, ref: 'User' }]
+	user: { type: Schema.Types.ObjectId, ref: 'User' }
 }, {
 	timestamps: true,
 })
