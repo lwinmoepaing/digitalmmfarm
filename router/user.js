@@ -16,6 +16,6 @@ router.get('/', passport.authenticate('jwt', {session: false}), AuthController.G
 /**
  *
  */
-router.get('/:id', UserController.GET_USER_BY_ID)
+router.put('/:id', passport.authenticate('jwt', {session: false}), UserController.GET_USER_BY_ID)
 
 module.exports = router

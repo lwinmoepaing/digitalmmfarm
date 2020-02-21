@@ -18,6 +18,7 @@ module.exports.CREATE_USER = async (req, res) => {
 
 	if(error) {
 		res.status(400).json( MANAGE_ERROR_MESSAGE(error) )
+		return
 	}
 
 	try {
@@ -53,6 +54,7 @@ module.exports.LOGIN_USER = async (req, res) => {
 
 	if(error) {
 		res.status(400).json( MANAGE_ERROR_MESSAGE(error) )
+		return
 	}
 
 	passport.authenticate('local', {session: false}, (err, user) => {

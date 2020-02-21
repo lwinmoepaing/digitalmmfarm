@@ -16,7 +16,7 @@ const Auth_Register_Validator = ({ body }) => {
 		password: Joi.string()
 			.min(6)
 			.required(),
-		role: Joi.string().valid(...ROLES),
+		role: Joi.string().valid(...ROLES).required(),
 		skills: Joi.array()
 	})
 	return schema.validate(body, {abortEarly: false})
