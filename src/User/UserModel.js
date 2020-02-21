@@ -9,17 +9,24 @@ const userSchema = new Schema({
 	name: {
 		type: String,
 		required: true,
-		index: true,
+		index: true
 	},
 	email: {
 		type: String,
 		unique: true,
+		required: true
 	},
 	password: {
 		type: String,
+		required: true
+	},
+	phone: {
+		type: String,
+		required: true,
+		index: true
 	},
 	birthDate: {
-		type: String,
+		type: String
 	},
 	skills: [
 		{ type: String, index: true }
@@ -30,7 +37,7 @@ const userSchema = new Schema({
 		default: 'User'
 	}
 }, {
-	timestamps: true
+	timestamps: true,
 })
 
 // Create a User model for the schema

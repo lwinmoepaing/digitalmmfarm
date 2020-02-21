@@ -1,6 +1,10 @@
 const Joi = require('@hapi/joi')
 const { ROLES } = require('../../config')
 
+// const pattern = /(?=^(09))([0-9]{6,11})$|(?=^(01))([0-9]{6,8})$/
+// const phRegex = new RegExp('^[0-9]$')
+const phRegex = new RegExp('(?=^(09))([0-9]{6,11})$|(?=^(01))([0-9]{6,8})$')
+
 /**
  * Auth Register Validator
  */
@@ -15,7 +19,12 @@ const Auth_Register_Validator = ({ body }) => {
 			.required(),
 		password: Joi.string()
 			.min(6)
-			.required(),
+			.required()
+		,
+		phone: Joi.string()
+			.pattern(phRegex)
+			.required()
+		,
 		role: Joi.string().valid(...ROLES).required(),
 		skills: Joi.array()
 	})

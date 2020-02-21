@@ -14,8 +14,14 @@ const UserController = require('../src/User/UserController')
 router.get('/', passport.authenticate('jwt', {session: false}), AuthController.GET_PROFILE_DATA)
 
 /**
- *
+ * Update User
+ * @doc : Access 'Admin' Or 'Self Update Man'
  */
 router.put('/:id', passport.authenticate('jwt', {session: false}), UserController.GET_USER_BY_ID)
+
+/**
+ * Delete User
+ */
+router.delete('/:id', passport.authenticate('jwt', {session: false}), UserController.DELETE_USER_BY_ID)
 
 module.exports = router
