@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
+const mongoosePaginate = require('mongoose-paginate-v2')
 const { Schema } = mongoose
-
 /**
  * Create User Schema
  * @doc : User Scalable Schema
@@ -42,6 +42,10 @@ const userSchema = new Schema({
 
 // Create a User model for the schema
 userSchema.index({'skills': 1}, {index: true})
+
+// Plugin Paginate
+userSchema.plugin(mongoosePaginate)
+
 const User = mongoose.model('User', userSchema)
 // Export User
 module.exports = User

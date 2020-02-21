@@ -11,13 +11,18 @@ const UserController = require('../src/User/UserController')
  * @doc : Getting to Self Profile
  */
 
-router.get('/', passport.authenticate('jwt', {session: false}), AuthController.GET_PROFILE_DATA)
+router.get('/me', passport.authenticate('jwt', {session: false}), AuthController.GET_PROFILE_DATA)
+
+/**
+ * Get All User (With Filters)
+ */
+router.get('/', passport.authenticate('jwt', {session: false}), UserController.GET_ALL_USERS)
 
 /**
  * Update User
  * @doc : Access 'Admin' Or 'Self Update Man'
  */
-router.put('/:id', passport.authenticate('jwt', {session: false}), UserController.GET_USER_BY_ID)
+router.put('/:id', passport.authenticate('jwt', {session: false}), UserController.UPDATE_USER_BY_ID)
 
 /**
  * Delete User

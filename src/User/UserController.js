@@ -1,16 +1,40 @@
 const User = require('./UserModel')
 
+const { PAGINATE_LABELS } = require('../../config')
 const { errorResponse, successResponse } = require('../../lib/responseHandler')
 const { DEEP_JSON_COPY } = require('../../lib/helper')
 const { User_Update_Validator } = require('./UserValidator')
 const { MANAGE_ERROR_MESSAGE } = require('../../lib/helper')
 
+
 /**
- * GET Profile Data
+ * User Lists
  */
 
-module.exports.GET_USER_BY_ID = async (req, res) => {
+module.exports.GET_ALL_USERS = async (req, res) => {
+
+	const { page = 1 } = req.query
+	const limit = 10
+	const options = {
+		select: '_id name email phone role skills',
+		sort: { createdAt: -1 },
+		page,
+		limit,
+		customLabels: PAGINATE_LABELS
+	}
+
+	const users = await User.paginate({}, options)
+	res.status(200).json(users)
+}
+
+
+/**
+ * Update User Profile By Id
+ */
+
+module.exports.UPDATE_USER_BY_ID = async (req, res) => {
 	const {error, value} = await User_Update_Validator(req)
+	console.log(req.url)
 
 	if(error) {
 		res.status(400).json( MANAGE_ERROR_MESSAGE(error) )
