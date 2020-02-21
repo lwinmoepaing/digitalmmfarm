@@ -4,6 +4,7 @@ const router = express.Router()
 const UserRouter = require('./user')
 const ProjectRouter = require('./project')
 const AuthRouter = require('./auth')
+const ImageRouter = require('./image')
 
 // Set Configure Routes
 router.use('/user', UserRouter)
@@ -11,5 +12,7 @@ router.use('/user', UserRouter)
 router.use('/project', ProjectRouter)
 // Authentication
 router.use('/auth', AuthRouter)
+// Image
+router.use('/images', ImageRouter)
 
 module.exports = router
