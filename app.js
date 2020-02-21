@@ -5,11 +5,12 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const passport = require('passport')
 const morgan = require('morgan')
+const routerEndPoints = require('express-list-endpoints')
 
 // Self Modules
 const config = require('./config')
 const errorHandler = require('./lib/errorHandler')
-const ApiRouter = require('./router')
+const ApiRouter = require('./services/router')
 // Importing Services
 const connectDb = require('./services/dbConnect')
 const Logger = require('./services/logger')
@@ -69,5 +70,8 @@ app.use('*', (req, res) => res.status(404).json({message: 'Request Not Found 404
  * @return { JSON }
  */
 app.use(errorHandler)
+console.log(
+	routerEndPoints(app)
+)
 
 module.exports = app
