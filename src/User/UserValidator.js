@@ -2,6 +2,8 @@ const Joi = require('@hapi/joi')
 Joi.objectId = require('joi-objectid')(Joi)
 const { ROLES } = require('../../config')
 
+// (?=^(09))([0-9]{6,11})$|(?=^(01))([0-9]{6,8})$
+
 /**
  * User Update Validator
  */
