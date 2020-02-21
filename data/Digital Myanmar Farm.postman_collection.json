@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "459bac8e-3b98-4a15-9d65-eae425bfb8c4",
+		"_postman_id": "80fc30df-5ca3-456a-aab7-fd5caf874515",
 		"name": "Digital Myanmar Farm",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -27,7 +27,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\": \"lwinmoepaing.dev@gmail.com\",\n\t\"name\": \"Lwin Moe Paing\",\n\t\"password\": \"secret\",\n\t\"role\": \"Admin\",\n\t\"skills\": [\n\t\t\"Coding\",\n\t\t\"NodeJs\"\n\t]\n}",
+							"raw": "{\n\t\"email\": \"lwinmoepaing.dev@gmail.com\",\n\t\"name\": \"Lwin Moe Paing\",\n\t\"password\": \"secret\",\n\t\"role\": \"Admin\",\n\t\"phone\": \"09420059241\",\n\t\"skills\": [\n\t\t\"Coding\",\n\t\t\"NodeJs\"\n\t]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -172,10 +172,25 @@
 								"key": "Authorization",
 								"value": "Bearer {{token}}",
 								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"A haha Weak\",\n\t\"role\": \"Staff\",\n\t\"phone\": \"09455484\",\n\t\"skills\": [\n\t\t\"Farming\",\n\t\t\"Seeding\"\n\t]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{api_url}}/api/v1/user/5e4ecf5b5544e83288b481dd",
+							"raw": "{{api_url}}/api/v1/user/5e4f97a55c3f461b123e5790",
 							"host": [
 								"{{api_url}}"
 							],
@@ -183,7 +198,43 @@
 								"api",
 								"v1",
 								"user",
-								"5e4ecf5b5544e83288b481dd"
+								"5e4f97a55c3f461b123e5790"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{api_url}}/api/v1/user/5e4fa3afb3a6931eae44a5e3",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"5e4fa3afb3a6931eae44a5e3"
 							]
 						}
 					},
