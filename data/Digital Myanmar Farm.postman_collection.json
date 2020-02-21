@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "80fc30df-5ca3-456a-aab7-fd5caf874515",
+		"_postman_id": "fd54d9e9-60af-4a8f-a0a9-302872bbaa1c",
 		"name": "Digital Myanmar Farm",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -118,7 +118,7 @@
 			"name": "User",
 			"item": [
 				{
-					"name": "Get User Info",
+					"name": "Get All User (Filter)",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -235,6 +235,55 @@
 								"v1",
 								"user",
 								"5e4fa3afb3a6931eae44a5e3"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Images",
+			"item": [
+				{
+					"name": "GET IMAGE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/images/1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"images",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Image (Authorized)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}/api/v1/image",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"image"
 							]
 						}
 					},

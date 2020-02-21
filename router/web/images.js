@@ -22,7 +22,9 @@ var mime = {
 /**
  * @doc : Fetching Image File
  * @route /api/v{Num}/image
+ * @return { Stream }
  */
+
 router.get('/:image', (req, res) => {
 	var dir = `${__dirname}/../../images/${req.params.image}`
 	if (!fs.existsSync(dir)){
