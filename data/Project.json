@@ -1,8 +1,50 @@
 [
 	{
 		"id": 1,
+		"headImg": "imgURL",
 		"title": "Project Title 1",
-		"body": "Body Text",
-		"user": 1
+		"body": ["Body Text", "Body Text2"],
+
+		"user": 1,
+		"attachmentImg": ["imgUrl1"],
+
+		"projectDuration": "About 1Month || Pending State",
+		"projectExpiredDate": "Date0 || Pending State",
+
+		"projectStartDate": "Date1 || AssignBy Staff",
+		"projectEndDate": "Date2 || AssignBy Staff",
+		"projectCategory": "Agriculture | AnimalHusbandry | Both",
+		"projectCreateBy": "Farmer | User",
+
+		"status": "Pending | Reject | Expired | Working | Finished ",
+
+		"intrestedUsers": [
+			{
+				"_id": "ObjectID",
+				"name": "Lwin",
+				"phone": "",
+				"image": ""
+			}
+		],
+		"contactUsers": [
+			{
+				"_id": "ObjectID",
+				"name": "Lwin",
+				"phone": "",
+				"image": ""
+			}
+		],
+		"assignedBy": {
+			"_id": "ObjectID",
+			"name": "Staff Name",
+			"phone": "",
+			"image": ""
+		},
+		"acceptBy": {
+			"_id": "ObjectID",
+			"name": "Farmer Name || Customer Name",
+			"phone": "",
+			"image": ""
+		}
 	}
 ]

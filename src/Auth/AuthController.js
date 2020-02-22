@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt')
 const passport = require('passport')
 const jwt = require('jsonwebtoken')
-// Modal Import
+// Model Import
 const User = require('../User/UserModel')
 // Self Import
 const { JWT_SECRET } = require('../../config')

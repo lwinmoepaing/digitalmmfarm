@@ -1,4 +1,4 @@
-const Image = require('./ImageModal')
+const Image = require('./ImageModel')
 
 const { errorResponse } = require('../../lib/responseHandler')
 const { PAGINATE_LABELS } = require('../../config')

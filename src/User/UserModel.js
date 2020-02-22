@@ -35,6 +35,10 @@ const userSchema = new Schema({
 		type: String,
 		enum: ['Admin', 'Staff', 'Farmer', 'User'],
 		default: 'User'
+	},
+	image: {
+		type: String,
+		default: '/profile/profile.jpg'
 	}
 }, {
 	timestamps: true,
