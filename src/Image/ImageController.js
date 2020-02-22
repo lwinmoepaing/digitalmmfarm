@@ -20,8 +20,12 @@ module.exports.GET_ALL_IMAGES = async (req, res) => {
 		}
 	}
 
-	const users = await Image.paginate({}, options)
-	res.status(200).json(users)
+	try {
+		const users = await Image.paginate({}, options)
+		res.status(200).json(users)
+	} catch (e) {
+		res.status(400).json(errorResponse(e))
+	}
 }
 
 
@@ -49,5 +53,28 @@ module.exports.CREATE_IMAGE = async (req, res) => {
 	}
 }
 
+/**
+ * GET Image By User
+ */
+module.exports.GET_IMAGE_BY_USER = async (req, res) => {
+	const { page = 1 } = req.query
+	const limit = 10
+	const options = {
+		select: '_id note url',
+		sort: { createdAt: -1 },
+		page,
+		limit,
+		customLabels: PAGINATE_LABELS,
+	}
+	const query = {
+		user: req.user._id
+	}
 
+	try {
+		const images = await Image.paginate( query, options)
+		res.status(200).json(images)
+	} catch(e) {
+		res.status(400).json(errorResponse(e))
+	}
+}
 

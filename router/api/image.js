@@ -8,7 +8,7 @@ const { passUpload } = require('../../middleware/imageUpload')
 /**
  * @doc : Get User Profile
  * @desc : Using Middlware JWT to Authenticate
- * @route /api/v{Num}/auth/me
+ * @route /api/v{Num}/image/
  */
 
 router.post('/',
@@ -20,12 +20,22 @@ router.post('/',
 /**
  * @doc : Get User Profile
  * @desc : Using Middlware JWT to Authenticate
- * @route /api/v{Num}/auth/me
+ * @route /api/v{Num}/image/
  */
 
 router.get('/',
 	passport.authenticate('jwt', {session: false}),
 	ImageController.GET_ALL_IMAGES
+)
+
+/**
+ * @doc : Get Images By User Jwt
+ * @desc : Using Middlware JWT to Authenticate
+ * @route /api/v{Num}/image/user
+ */
+router.get('/user',
+	passport.authenticate('jwt', {session: false}),
+	ImageController.GET_IMAGE_BY_USER
 )
 
 module.exports = router
