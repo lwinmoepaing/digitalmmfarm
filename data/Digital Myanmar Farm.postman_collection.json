@@ -148,7 +148,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{api_url}}/api/v1/user/5e4ec61e126c8b323c74e6b5",
+							"raw": "{{api_url}}/api/v1/user/5e515a5caa042410945e2610",
 							"host": [
 								"{{api_url}}"
 							],
@@ -156,7 +156,7 @@
 								"api",
 								"v1",
 								"user",
-								"5e4ec61e126c8b323c74e6b5"
+								"5e515a5caa042410945e2610"
 							]
 						}
 					},
@@ -189,7 +189,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{api_url}}/api/v1/user/5e4f97a55c3f461b123e5790",
+							"raw": "{{api_url}}/api/v1/user/5e515a5caa042410945e2610",
 							"host": [
 								"{{api_url}}"
 							],
@@ -197,7 +197,7 @@
 								"api",
 								"v1",
 								"user",
-								"5e4f97a55c3f461b123e5790"
+								"5e515a5caa042410945e2610"
 							]
 						}
 					},
@@ -249,7 +249,13 @@
 					"name": "GET IMAGE",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "{{api_url}}/api/v1/image",
 							"host": [
@@ -287,7 +293,12 @@
 								{
 									"key": "image",
 									"type": "file",
-									"src": []
+									"src": "/C:/Users/pro gamer/Pictures/412648.jpg"
+								},
+								{
+									"key": "note",
+									"value": "\" Hello \"",
+									"type": "text"
 								}
 							]
 						},
@@ -378,26 +389,6 @@
 					"response": []
 				},
 				{
-					"name": "Get Project from Farmers(pendi)",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{api_url}}/api/v1/project/farmer",
-							"host": [
-								"{{api_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"project",
-								"farmer"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Get Users (Status)",
 					"request": {
 						"method": "GET",
@@ -419,26 +410,6 @@
 									"key": "status",
 									"value": "Expired"
 								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Project From Users(pendi)",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{api_url}}/api/v1/project/user",
-							"host": [
-								"{{api_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"project",
-								"user"
 							]
 						}
 					},
@@ -483,7 +454,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"headImg\": \"/wallpaper/wallpaper.png\",\n\t\"title\": \"Title One\",\n\t\"body\": [\"Body1 \", \"Body Param2\", \"Body Param3\"],\n\t\"projectDuration\": \"About 1 month\",\n\t\"projectExipredDate\": \"\",\n\t\"projectCategory\": \"Agriculture\"\n}",
+							"raw": "{\n\t\"headImg\": \"/wallpaper/wallpaper.png\",\n\t\"title\": \"Farmer Two\",\n\t\"body\": [\"Famer 1 \", \"Farmer Param2\", \"FFFF Param3\"],\n\t\"projectDuration\": \"About 1 F month\",\n\t\"projectExpiredDate\": \"2020-02-29\",\n\t\"projectCategory\": \"AnimalHusbandry\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -510,7 +481,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{api_url}}/api/v1/project/5e51092538b94426805d4409",
+							"raw": "{{api_url}}/api/v1/project/5e515c576ad7333358765c54",
 							"host": [
 								"{{api_url}}"
 							],
@@ -518,7 +489,7 @@
 								"api",
 								"v1",
 								"project",
-								"5e51092538b94426805d4409"
+								"5e515c576ad7333358765c54"
 							]
 						}
 					},
