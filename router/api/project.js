@@ -6,13 +6,13 @@ const passport = require('passport')
 const ProjectController = require('../../src/Project/ProjectController')
 
 // Get All Projects
-router.get('/', (req, res) => res.json({all: true}))
+router.get('/', ProjectController.GET_ALL_PROJECT)
 // Get Project From Farmers
-router.get('/farmer', (req, res) => res.json({farmer: !0}))
+router.get('/farmer', ProjectController.GET_PROJECT_FROM_FARMERS)
 // Get Project From Users
-router.get('/user', (req, res) => res.json({user: !0}))
+router.get('/user', ProjectController.GET_PROJECT_FROM_USERS)
 // Check Epired Project
-router.get('/checkExpired', (req, res) => res.json({expired: true}))
+router.get('/checkExpired', ProjectController.CHECK_EXPIRED_AND_SET)
 
 // Create Project By Farmer || User
 router.post('/', passport.authenticate('jwt', {session: false}), ProjectController.CREATE_PROJECT)

@@ -1,6 +1,7 @@
 const User = require('../User/UserModel')
 const Project = require('./ProjectModel')
 
+const { PAGINATE_LABELS } = require('../../config')
 const { successResponse, errorResponse } = require('../../lib/responseHandler')
 const { MANAGE_ERROR_MESSAGE, IS_VALID_ID, DEEP_JSON_COPY } = require('../../lib/helper')
 const { Project_Create_Validator } = require('./ProjectValidator')
@@ -9,7 +10,109 @@ const { Project_Create_Validator } = require('./ProjectValidator')
 /**
  *
  */
+module.exports.GET_ALL_PROJECT = async (req, res) => {
+	const { page = 1 } = req.query
+	const limit = 10
+	const options = {
+		// select: '_id title',
+		sort: { createdAt: -1 },
+		page,
+		limit,
+		customLabels: PAGINATE_LABELS
+	}
 
+	try {
+		const projects = await Project.paginate({}, options)
+		res.status(200).json(projects)
+	} catch (e) {
+		res.status(400).json(errorResponse(e))
+	}
+}
+
+/**
+ *
+ */
+module.exports.GET_PROJECT_FROM_FARMERS = async (req, res) => {
+	const { page = 1 } = req.query
+	const limit = 10
+	const options = {
+		// select: '_id title',
+		sort: { createdAt: -1 },
+		page,
+		limit,
+		customLabels: PAGINATE_LABELS
+	}
+
+	try {
+		// Where Query
+		const query = {
+			status: 'Pending',
+			projectCreateBy: 'Farmer'
+		}
+		const projects = await Project.paginate(query, options)
+		res.status(200).json(projects)
+	} catch (e) {
+		res.status(400).json(errorResponse(e))
+	}
+}
+
+/**
+ *
+ */
+module.exports.GET_PROJECT_FROM_USERS = async (req, res) => {
+	const { page = 1 } = req.query
+	const limit = 10
+	const options = {
+		// select: '_id title',
+		sort: { createdAt: -1 },
+		page,
+		limit,
+		customLabels: PAGINATE_LABELS
+	}
+
+	try {
+		// Where Query
+		const query = {
+			status: 'Pending',
+			projectCreateBy: 'User'
+		}
+		const projects = await Project.paginate(query, options)
+		res.status(200).json(projects)
+	} catch (e) {
+		res.status(400).json(errorResponse(e))
+	}
+}
+
+/**
+ *
+ */
+module.exports.CHECK_EXPIRED_AND_SET = async (req, res) => {
+	const today = new Date()
+	today.setHours(0,0,0,0)
+	const tomorrow = new Date(today)
+	tomorrow.setDate(tomorrow.getDate() + 1)
+
+	const query = {
+		status: 'Pending',
+		projectExpiredDate: { $lte: tomorrow }
+	}
+
+	const update = {
+		status: 'Expired'
+	}
+
+	try {
+		const projects = await Project.updateMany(query, update)
+		res.status(200).json(
+			{
+				success: 'Successfully Get Expired Data',
+				data: projects,
+			}
+		)
+	} catch(e) {
+		res.status(400).json(errorResponse(e))
+	}
+}
 
 /**
  * Create Project
