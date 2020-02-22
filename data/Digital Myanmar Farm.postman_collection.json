@@ -118,7 +118,7 @@
 			"name": "User",
 			"item": [
 				{
-					"name": "Get All User (Filter)",
+					"name": "Get All User (Page Filter)",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -129,15 +129,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{api_url}}/api/v1/user/",
+							"raw": "{{api_url}}/api/v1/user",
 							"host": [
 								"{{api_url}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"user",
-								""
+								"user"
 							]
 						}
 					},
@@ -274,8 +273,24 @@
 								"key": "Authorization",
 								"value": "Bearer {{token}}",
 								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
 						"url": {
 							"raw": "{{api_url}}/api/v1/image",
 							"host": [
@@ -305,6 +320,253 @@
 								"v1",
 								"image",
 								"user_id"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Project",
+			"item": [
+				{
+					"name": "Get All Projects ( CreatedDesc )",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/api/v1/project",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"project"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Farmers (Status)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/api/v1/project/farmer/status?status=Pending",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"project",
+								"farmer",
+								"status"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "Pending"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Project from Farmers(pendi)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/api/v1/project/farmer",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"project",
+								"farmer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Users (Status)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/api/v1/project/user/status?status=Expired",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"project",
+								"user",
+								"status"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "Expired"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Project From Users(pendi)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/api/v1/project/user",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"project",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check And Set Expired",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/api/v1/project/checkExpired",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"project",
+								"checkExpired"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Project By User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"headImg\": \"/wallpaper/wallpaper.png\",\n\t\"title\": \"Title One\",\n\t\"body\": [\"Body1 \", \"Body Param2\", \"Body Param3\"],\n\t\"projectDuration\": \"About 1 month\",\n\t\"projectExipredDate\": \"\",\n\t\"projectCategory\": \"Agriculture\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/api/v1/project",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"project"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Project By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/api/v1/project/5e51092538b94426805d4409",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"project",
+								"5e51092538b94426805d4409"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Contact  Project(Id) by User(!Farmer)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/api/v1/project/contact/5e51092538b94426805d4409",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"project",
+								"contact",
+								"5e51092538b94426805d4409"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Interested Project(Id) by User(Id)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}/api/v1/project/interested/5e51092538b94426805d4409",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"project",
+								"interested",
+								"5e51092538b94426805d4409"
 							]
 						}
 					},
