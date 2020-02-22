@@ -2,9 +2,8 @@ const express = require('express')
 const router = express.Router()
 const passport = require('passport')
 // Controller
-const { upload } = require('../../middleware/imageUpload')
 const ImageController = require('../../src/Image/ImageController')
-
+const { passUpload } = require('../../middleware/imageUpload')
 
 /**
  * @doc : Get User Profile
@@ -14,7 +13,7 @@ const ImageController = require('../../src/Image/ImageController')
 
 router.post('/',
 	passport.authenticate('jwt', {session: false}),
-	upload.single('image'),
+	passUpload,
 	ImageController.CREATE_IMAGE
 )
 

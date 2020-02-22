@@ -1,15 +1,26 @@
 const mongoose = require('mongoose')
 const mongoosePaginate = require('mongoose-paginate-v2')
 const { Schema } = mongoose
+
 /**
  * Create User Schema
  * @doc : User Scalable Schema
  */
 const imageSchema = new Schema({
-	_id: {
+	url: {
 		type: String,
+		unique: true,
+		required: true,
 	},
-	user: { type: Schema.Types.ObjectId, ref: 'User' }
+	user: {
+		type: Schema.Types.ObjectId,
+		ref: 'User',
+		index: true,
+		required: true,
+	},
+	note: {
+		type: String
+	}
 }, {
 	timestamps: true,
 })
