@@ -9,9 +9,10 @@ const ProjectController = require('../../src/Project/ProjectController')
 router.get('/', ProjectController.GET_ALL_PROJECT)
 // Get Project Status From Farmers
 router.get('/farmer/status', ProjectController.GET_PROJECT_FROM_FARMERS_STATUS)
-
 // Get Project From Users
 router.get('/user/status', ProjectController.GET_PROJECT_FROM_USERS_STATUS)
+// Get Project By User Id
+router.get('/userId/:userId', ProjectController.GET_PROJECT_BY_USER_ID)
 
 // Check Epired Project
 router.get('/checkExpired', ProjectController.CHECK_EXPIRED_AND_SET)
@@ -19,7 +20,7 @@ router.get('/checkExpired', ProjectController.CHECK_EXPIRED_AND_SET)
 // Create Project By Farmer || User
 router.post('/', passport.authenticate('jwt', {session: false}), ProjectController.CREATE_PROJECT)
 
-// Get Project By Id ( Show Project To User or All )
+// Get Project Detail By Id ( Show Project To User or All )
 router.get('/:id', ProjectController.GET_PROJECT_BY_ID)
 
 // Set Interested To Project

@@ -77,7 +77,42 @@ module.exports.GET_PROJECT_FROM_USERS_STATUS = async (req, res) => {
 }
 
 /**
- *
+ * Get Project By User Id
+ */
+module.exports.GET_PROJECT_BY_USER_ID = async (req, res) => {
+	const { userId = null } = req.params
+	const { error } = IS_VALID_ID(userId)
+
+	if (error) {
+		res.status(400).json(MANAGE_ERROR_MESSAGE(error))
+		return
+	}
+
+	const { page = 1 } = req.query
+	const limit = 10
+	const options = {
+		sort: { createdAt: -1 },
+		page,
+		limit,
+		customLabels: PAGINATE_LABELS
+	}
+
+	// Query Filters
+	let query = { user: userId }
+	if(req.query.status) { query.status = req.query.status }
+	if(req.query.projectCategory) { query.projectCategory = req.query.projectCategory }
+
+	try {
+		const project = await Project.paginate(query, options)
+		res.status(200).json(project)
+	} catch (e) {
+		res.status(400).json(errorResponse(e))
+	}
+
+}
+
+/**
+ * Check Expired Date And Set is Expired Or not
  */
 module.exports.CHECK_EXPIRED_AND_SET = async (req, res) => {
 	const today = new Date()
