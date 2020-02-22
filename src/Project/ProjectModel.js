@@ -46,7 +46,11 @@ const projectSchema = new Schema({
 		type: String,
 		required: true
 	},
-	projectExpiredData: Date,
+	projectExpiredDate: {
+		type: Date,
+		required: true,
+		index: true
+	},
 	// For Working State
 	projectStartDate: Date,
 	projectEndDate: Date,

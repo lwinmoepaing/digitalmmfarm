@@ -5,8 +5,14 @@ const { successResponse, errorResponse } = require('../../lib/responseHandler')
 const { MANAGE_ERROR_MESSAGE, IS_VALID_ID, DEEP_JSON_COPY } = require('../../lib/helper')
 const { Project_Create_Validator } = require('./ProjectValidator')
 
+
 /**
  *
+ */
+
+
+/**
+ * Create Project
  */
 module.exports.CREATE_PROJECT = async (req, res) => {
 
@@ -36,7 +42,7 @@ module.exports.CREATE_PROJECT = async (req, res) => {
 }
 
 /**
- *
+ * Get Project By ID
  */
 module.exports.GET_PROJECT_BY_ID = async (req, res) => {
 	const { error } = IS_VALID_ID(req.params.id)
@@ -104,7 +110,7 @@ module.exports.SET_PROJECT_INTERESTED = async (req, res) => {
 }
 
 /**
- *
+ * Set Contact For Contact User Array
  */
 module.exports.SET_PROJECT_CONTACT = async (req, res) => {
 	const { error } = IS_VALID_ID(req.params.projectId)
@@ -114,7 +120,7 @@ module.exports.SET_PROJECT_CONTACT = async (req, res) => {
 		return
 	}
 
-	if(req.user.role !== 'User') {
+	if(req.user.role !== 'User' || req.user.role !== 'Farmer') {
 		res.status(400).json(errorResponse(new Error(`You Are Not Allowed For Type:${req.user.role}`)))
 		return
 	}

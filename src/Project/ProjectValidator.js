@@ -1,4 +1,6 @@
-const Joi = require('@hapi/joi')
+const JoiDate = require('@hapi/joi-date')
+const Joi = require('@hapi/joi').extend(JoiDate)
+
 
 /**
  * Auth Login Validator
@@ -16,11 +18,16 @@ const Project_Create_Validator = ({ body }) => {
 			.items(Joi.string())
 			.min(1)
 			.required(),
+		projectExpiredDate: Joi.date()
+			.format(['YYYY-MM-DD'])
+			.utc()
+			.required(),
 		projectDuration: Joi.string()
 			.trim(true)
 			.required(),
 		projectCategory: Joi.string()
 			.valid(...['Agriculture', 'AnimalHusbandry', 'Both'])
+			.required()
 	})
 
 	return schema.validate(body, {abortEarly: false})

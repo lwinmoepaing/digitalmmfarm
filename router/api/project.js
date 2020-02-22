@@ -5,6 +5,14 @@ const passport = require('passport')
 // Importing Controller
 const ProjectController = require('../../src/Project/ProjectController')
 
+// Get All Projects
+router.get('/', (req, res) => res.json({all: true}))
+// Get Project From Farmers
+router.get('/farmer', (req, res) => res.json({farmer: !0}))
+// Get Project From Users
+router.get('/user', (req, res) => res.json({user: !0}))
+// Check Epired Project
+router.get('/checkExpired', (req, res) => res.json({expired: true}))
 
 // Create Project By Farmer || User
 router.post('/', passport.authenticate('jwt', {session: false}), ProjectController.CREATE_PROJECT)
