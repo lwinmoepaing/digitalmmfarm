@@ -29,31 +29,6 @@ module.exports.GET_ALL_PROJECT = async (req, res) => {
 	}
 }
 
-/**
- *
- */
-module.exports.GET_PROJECT_FROM_FARMERS = async (req, res) => {
-	const { page = 1 } = req.query
-	const limit = 10
-	const options = {
-		sort: { createdAt: -1 },
-		page,
-		limit,
-		customLabels: PAGINATE_LABELS
-	}
-
-	try {
-		// Where Query
-		const query = {
-			status: 'Pending',
-			projectCreateBy: 'Farmer'
-		}
-		const projects = await Project.paginate(query, options)
-		res.status(200).json(projects)
-	} catch (e) {
-		res.status(400).json(errorResponse(e))
-	}
-}
 
 /**
  *
@@ -76,34 +51,6 @@ module.exports.GET_PROJECT_FROM_FARMERS_STATUS = async (req, res) => {
 
 	const projects = await Project.paginate(query, options)
 	res.status(200).json(projects)
-}
-
-
-/**
- *
- */
-module.exports.GET_PROJECT_FROM_USERS = async (req, res) => {
-	const { page = 1 } = req.query
-	const limit = 10
-	const options = {
-		// select: '_id title',
-		sort: { createdAt: -1 },
-		page,
-		limit,
-		customLabels: PAGINATE_LABELS
-	}
-
-	try {
-		// Where Query
-		const query = {
-			status: 'Pending',
-			projectCreateBy: 'User'
-		}
-		const projects = await Project.paginate(query, options)
-		res.status(200).json(projects)
-	} catch (e) {
-		res.status(400).json(errorResponse(e))
-	}
 }
 
 /**
