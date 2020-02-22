@@ -13,6 +13,9 @@ router.post('/', passport.authenticate('jwt', {session: false}), ProjectControll
 router.get('/:id', ProjectController.GET_PROJECT_BY_ID)
 
 // Set Interested To Project
-router.get('/project/interested/:project_id', ProjectController.SET_PROJECT_INTERESTED)
+router.get('/interested/:projectId', passport.authenticate('jwt', {session: false}), ProjectController.SET_PROJECT_INTERESTED)
+
+// Set Contact To Project
+router.post('/contact/:projectId', passport.authenticate('jwt', {session: false}), ProjectController.SET_PROJECT_CONTACT)
 
 module.exports = router

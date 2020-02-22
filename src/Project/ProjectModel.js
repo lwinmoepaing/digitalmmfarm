@@ -73,14 +73,18 @@ const projectSchema = new Schema({
 	},
 
 	// Interested User Array
-	intrestedUser: [{
+	interestedUsers: [{
 		type: Schema.Types.ObjectId,
 		ref: 'User',
 		index: true,
 	}],
 
 	// Contact User Array
-	contactUsers: [miniUserSchema],
+	contactUsers: [{
+		type: Schema.Types.ObjectId,
+		ref: 'User',
+		index: true,
+	}],
 
 	// For Staffs
 	assignedBy: {

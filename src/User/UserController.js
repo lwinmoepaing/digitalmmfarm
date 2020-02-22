@@ -46,7 +46,7 @@ module.exports.UPDATE_USER_BY_ID = async (req, res) => {
 
 		const isCondition = user._id === req.user._id || req.user.role === 'Admin'
 		if(!isCondition) {
-			throw new Error('Not Allowed')
+			throw new Error('Not Allowed Authorized')
 		}
 		const { body } = req
 
