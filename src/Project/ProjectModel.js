@@ -24,7 +24,7 @@ const miniUserSchema =	new Schema({
 const projectSchema = new Schema({
 	headImg: {
 		type: String,
-		default: '/wallpaper/wallpaper.png'
+		default: '/wallpaper/wallpaper.jpg'
 	},
 	title: {
 		type: String,
@@ -68,6 +68,7 @@ const projectSchema = new Schema({
 		type: String,
 		enum: ['Pending', 'Reject', 'Expired', 'Working', 'Finished'],
 		index: true,
+		default: 'Pending',
 		required: true
 	},
 
@@ -81,7 +82,7 @@ const projectSchema = new Schema({
 	assignedBy: {
 		type: miniUserSchema,
 	},
-	acceptBy: {
+	acceptedBy: {
 		type: miniUserSchema
 	}
 }, {

@@ -14,6 +14,7 @@
 		"projectStartDate": "Date1 || AssignBy Staff",
 		"projectEndDate": "Date2 || AssignBy Staff",
 		"projectCategory": "Agriculture | AnimalHusbandry | Both",
+
 		"projectCreateBy": "Farmer | User",
 
 		"status": "Pending | Reject | Expired | Working | Finished ",
@@ -40,7 +41,7 @@
 			"phone": "",
 			"image": ""
 		},
-		"acceptBy": {
+		"acceptedBy": {
 			"_id": "ObjectID",
 			"name": "Farmer Name || Customer Name",
 			"phone": "",
