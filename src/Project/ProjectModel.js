@@ -52,7 +52,7 @@ const projectSchema = new Schema({
 	projectEndDate: Date,
 	projectCategory: {
 		type: String,
-		enum: ['Agriculture ', 'AnimalHusbandry', 'Both'],
+		enum: ['Agriculture', 'AnimalHusbandry', 'Both'],
 		index: true,
 		required: true,
 	},
@@ -73,7 +73,11 @@ const projectSchema = new Schema({
 	},
 
 	// Interested User Array
-	intrestedUser: [miniUserSchema],
+	intrestedUser: [{
+		type: Schema.Types.ObjectId,
+		ref: 'User',
+		index: true,
+	}],
 
 	// Contact User Array
 	contactUsers: [miniUserSchema],

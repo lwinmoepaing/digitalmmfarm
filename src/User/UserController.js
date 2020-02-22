@@ -34,7 +34,6 @@ module.exports.GET_ALL_USERS = async (req, res) => {
 
 module.exports.UPDATE_USER_BY_ID = async (req, res) => {
 	const {error, value} = await User_Update_Validator(req)
-	console.log(req.url)
 
 	if(error) {
 		res.status(400).json( MANAGE_ERROR_MESSAGE(error) )
