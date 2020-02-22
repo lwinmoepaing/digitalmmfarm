@@ -7,10 +7,17 @@ const ProjectController = require('../../src/Project/ProjectController')
 
 // Get All Projects
 router.get('/', ProjectController.GET_ALL_PROJECT)
+// Get Project Status From Farmers
+router.get('/farmer/status', ProjectController.GET_PROJECT_FROM_FARMERS_STATUS)
 // Get Project From Farmers
 router.get('/farmer', ProjectController.GET_PROJECT_FROM_FARMERS)
+
+
 // Get Project From Users
 router.get('/user', ProjectController.GET_PROJECT_FROM_USERS)
+// Get Project From Users
+router.get('/user/status', ProjectController.GET_PROJECT_FROM_USERS_STATUS)
+
 // Check Epired Project
 router.get('/checkExpired', ProjectController.CHECK_EXPIRED_AND_SET)
 
