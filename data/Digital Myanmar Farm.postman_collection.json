@@ -252,13 +252,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{api_url}}/images/1",
+							"raw": "{{api_url}}/api/v1/image",
 							"host": [
 								"{{api_url}}"
 							],
 							"path": [
-								"images",
-								"1"
+								"api",
+								"v1",
+								"image"
 							]
 						}
 					},
@@ -284,6 +285,26 @@
 								"api",
 								"v1",
 								"image"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Image By User Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/api/v1/image/user_id",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"image",
+								"user_id"
 							]
 						}
 					},

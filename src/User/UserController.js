@@ -83,3 +83,16 @@ module.exports.DELETE_USER_BY_ID = async (req, res) => {
 		res.status(400).json(errorResponse(e))
 	}
 }
+
+/**
+ * GET USER by ID
+ */
+module.exports.GET_USER_BY_ID = async (req, res) => {
+	try {
+		const user = await User.findById(req.params.id).select('_id name role skills')
+		if(!user) throw new Error ('User Not Found ')
+		res.status(200).json(successResponse(user))
+	} catch (e) {
+		res.status(400).json(errorResponse(e))
+	}
+}

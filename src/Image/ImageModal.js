@@ -20,6 +20,11 @@ const imageSchema = new Schema({
 	},
 	note: {
 		type: String
+	},
+	deletedAt: {
+		type: Date,
+		default: null,
+		index: true
 	}
 }, {
 	timestamps: true,

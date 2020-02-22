@@ -17,4 +17,15 @@ router.post('/',
 	ImageController.CREATE_IMAGE
 )
 
+/**
+ * @doc : Get User Profile
+ * @desc : Using Middlware JWT to Authenticate
+ * @route /api/v{Num}/auth/me
+ */
+
+router.get('/',
+	passport.authenticate('jwt', {session: false}),
+	ImageController.GET_ALL_IMAGES
+)
+
 module.exports = router

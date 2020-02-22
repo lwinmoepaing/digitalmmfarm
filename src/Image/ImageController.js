@@ -1,5 +1,29 @@
 const Image = require('./ImageModal')
+
 const { errorResponse } = require('../../lib/responseHandler')
+const { PAGINATE_LABELS } = require('../../config')
+
+/**
+ * GET ALL IMAGES
+ */
+module.exports.GET_ALL_IMAGES = async (req, res) => {
+	const { page = 1 } = req.query
+	const limit = 10
+	const options = {
+		select: '_id note url',
+		sort: { createdAt: -1 },
+		page,
+		limit,
+		customLabels: PAGINATE_LABELS,
+		populate: {
+			path: 'user', select: 'name role'
+		}
+	}
+
+	const users = await Image.paginate({}, options)
+	res.status(200).json(users)
+}
+
 
 /**
  * Creating Image

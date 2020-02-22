@@ -19,6 +19,11 @@ router.get('/me', passport.authenticate('jwt', {session: false}), AuthController
 router.get('/', passport.authenticate('jwt', {session: false}), UserController.GET_ALL_USERS)
 
 /**
+ * GET User By Id
+ */
+router.get('/:id', UserController.GET_USER_BY_ID)
+
+/**
  * Update User
  * @doc : Access 'Admin' Or 'Self Update Man'
  */
