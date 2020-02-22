@@ -46,6 +46,9 @@
 			"name": "Farmer Name || Customer Name",
 			"phone": "",
 			"image": ""
+		},
+		"isClosed": {
+			"type": ""
 		}
 	}
 ]

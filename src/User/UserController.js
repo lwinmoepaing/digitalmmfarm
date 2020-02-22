@@ -48,8 +48,8 @@ module.exports.UPDATE_USER_BY_ID = async (req, res) => {
 		if(!isCondition) {
 			throw new Error('Not Allowed Authorized')
 		}
-		const { body } = req
 
+		const { body } = req
 		const oldData = await User.findByIdAndUpdate(req.params.id, body)
 		const data = {
 			...DEEP_JSON_COPY(oldData),

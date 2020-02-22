@@ -2,20 +2,6 @@ const mongoose = require('mongoose')
 const mongoosePaginate = require('mongoose-paginate-v2')
 const { Schema } = mongoose
 
-const miniUserSchema =	new Schema({
-	name: {
-		type: String,
-		required: true
-	},
-	phone: {
-		type: String,
-		required: true
-	},
-	image: {
-		type: String,
-		default: ''
-	}
-})
 
 /**
  * Create Project Schema
@@ -92,10 +78,20 @@ const projectSchema = new Schema({
 
 	// For Staffs
 	assignedBy: {
-		type: miniUserSchema,
+		type: Schema.Types.ObjectId,
+		ref: 'User',
+		index: true,
 	},
 	acceptedBy: {
-		type: miniUserSchema
+		type: Schema.Types.ObjectId,
+		ref: 'User',
+		index: true,
+	},
+	isClosed: {
+		type: Boolean,
+		default: false,
+		required: true,
+		index: true
 	}
 }, {
 	timestamps: true,

@@ -1,10 +1,9 @@
 const User = require('../User/UserModel')
 const Project = require('./ProjectModel')
-
 const { PAGINATE_LABELS } = require('../../config')
 const { successResponse, errorResponse } = require('../../lib/responseHandler')
 const { MANAGE_ERROR_MESSAGE, IS_VALID_ID, DEEP_JSON_COPY } = require('../../lib/helper')
-const { Project_Create_Validator } = require('./ProjectValidator')
+const { Project_Create_Validator, Project_Update_Validator } = require('./ProjectValidator')
 
 
 /**
@@ -126,7 +125,8 @@ module.exports.CHECK_EXPIRED_AND_SET = async (req, res) => {
 	}
 
 	const update = {
-		status: 'Expired'
+		status: 'Expired',
+		isClosed: true
 	}
 
 	try {
@@ -194,6 +194,14 @@ module.exports.GET_PROJECT_BY_ID = async (req, res) => {
 				path: 'contactUsers',
 				select: 'name email phone'
 			})
+			.populate({
+				path: 'assignedBy',
+				select: 'name email phone '
+			})
+			.populate({
+				path: 'acceptedBy',
+				select: 'name email phone'
+			})
 		if(!project) {
 			throw new Error('Not Found Project')
 		}
@@ -202,6 +210,68 @@ module.exports.GET_PROJECT_BY_ID = async (req, res) => {
 	} catch (e) {
 		res.status(400).json(errorResponse(e))
 	}
+}
+
+/**
+ * Update Project By Id
+ */
+module.exports.UPDATE_PROJECT_BY_ID = async (req, res) => {
+	const { id = null } = req.params
+	const { error: idError } = IS_VALID_ID(id)
+
+	// Is Not Valid Error
+	if (idError) {
+		res.status(400).json(MANAGE_ERROR_MESSAGE(idError))
+		return
+	}
+
+	// Project Update Error
+	const {error, value} = await Project_Update_Validator(req)
+	if(error) {
+		res.status(400).json( MANAGE_ERROR_MESSAGE(error) )
+		return
+	}
+
+	try {
+		const project = await Project.findById(id)
+
+		if(!project) {
+			throw new Error('Project Not Found')
+		}
+
+		// If User Update [Own/Self Project]
+		if(DEEP_JSON_COPY(project.user) === DEEP_JSON_COPY(req.user._id)) {
+			const oldData = await Project.findByIdAndUpdate(id, value)
+			const data = {
+				...DEEP_JSON_COPY(oldData),
+				...value
+			}
+			res.status(200).json(successResponse(data, 'Successfully Updated'))
+			return
+		}
+
+		// If Staff Or Admin
+		if(req.user.role === 'Admin' || req.user.role === 'Staff') {
+			const payloads = {
+				...value
+			}
+			if(req.body.acceptedBy) {
+				payloads.assignedBy = req.user._id
+				payloads.isClosed = true
+			}
+			const oldData = await Project.findByIdAndUpdate(id, payloads)
+			const data = {
+				...DEEP_JSON_COPY(oldData),
+				...payloads
+			}
+			res.status(200).json(successResponse(data, 'Successfully Updated'))
+			return
+		}
+
+	} catch (e) {
+		res.status(400).json(errorResponse(e))
+	}
+
 }
 
 /**
@@ -251,7 +321,7 @@ module.exports.SET_PROJECT_CONTACT = async (req, res) => {
 		return
 	}
 
-	if(req.user.role !== 'User' || req.user.role !== 'Farmer') {
+	if(req.user.role !== 'User' && req.user.role !== 'Farmer') {
 		res.status(400).json(errorResponse(new Error(`You Are Not Allowed For Type:${req.user.role}`)))
 		return
 	}

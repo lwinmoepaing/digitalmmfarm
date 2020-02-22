@@ -22,6 +22,8 @@ router.post('/', passport.authenticate('jwt', {session: false}), ProjectControll
 
 // Get Project Detail By Id ( Show Project To User or All )
 router.get('/:id', ProjectController.GET_PROJECT_BY_ID)
+// Update Project By Id
+router.put('/:id', passport.authenticate('jwt', {session: false}), ProjectController.UPDATE_PROJECT_BY_ID)
 
 // Set Interested To Project
 router.get('/interested/:projectId', passport.authenticate('jwt', {session: false}), ProjectController.SET_PROJECT_INTERESTED)

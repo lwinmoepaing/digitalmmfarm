@@ -1,6 +1,6 @@
 //require mongoose module
 var mongoose = require('mongoose')
-
+mongoose.Promise = global.Promise
 
 //require database URL from properties file
 var { MONGO_URI } = require('../config')
