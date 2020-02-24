@@ -43,7 +43,7 @@ module.exports.GET_PROJECT_FROM_FARMERS_STATUS = async (req, res) => {
 		customLabels: PAGINATE_LABELS,
 		populate: {
 			path: 'user',
-			select: 'name email phone role skills'
+			select: 'name email phone role skills image'
 		}
 	}
 
@@ -70,7 +70,7 @@ module.exports.GET_PROJECT_FROM_USERS_STATUS = async (req, res) => {
 		customLabels: PAGINATE_LABELS,
 		populate: {
 			path: 'user',
-			select: 'name email phone role skills'
+			select: 'name email phone role skills image'
 		}
 	}
 
