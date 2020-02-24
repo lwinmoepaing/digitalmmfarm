@@ -67,7 +67,11 @@ module.exports.GET_PROJECT_FROM_USERS_STATUS = async (req, res) => {
 		sort: { createdAt: -1 },
 		page,
 		limit,
-		customLabels: PAGINATE_LABELS
+		customLabels: PAGINATE_LABELS,
+		populate: {
+			path: 'user',
+			select: 'name email phone role skills'
+		}
 	}
 
 	const query = {
