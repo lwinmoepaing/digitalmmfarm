@@ -39,7 +39,7 @@ const userSchema = new Schema({
 	},
 	image: {
 		type: String,
-		default: '/profile/profile.jpg'
+		default: '/profile/profile.png'
 	}
 }, {
 	timestamps: true,
