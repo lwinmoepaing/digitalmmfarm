@@ -1,4 +1,5 @@
 const Image = require('./ImageModel')
+const Project = require('../Project/ProjectModel')
 
 const { errorResponse } = require('../../lib/responseHandler')
 const { PAGINATE_LABELS } = require('../../config')
@@ -39,13 +40,20 @@ module.exports.CREATE_IMAGE = async (req, res) => {
 			throw new Error('Invalid File')
 		}
 
+		const imageFilePath = `/images/${req.file.filename}`
 		const image = new Image({
-			url: `/images/${req.file.filename}`,
+			url: imageFilePath,
 			user: `${req.user._id}`,
 			note: req.body.note || ''
 		})
 
 		await image.save()
+
+		if(req.query.projectId) {
+			await Project.findByIdAndUpdate(req.query.projectId, {
+				headImg: imageFilePath
+			})
+		}
 
 		res.json({ image })
 	} catch (e) {
