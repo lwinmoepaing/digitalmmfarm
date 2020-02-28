@@ -101,7 +101,11 @@ module.exports.GET_PROJECT_BY_USER_ID = async (req, res) => {
 		sort: { createdAt: -1 },
 		page,
 		limit,
-		customLabels: PAGINATE_LABELS
+		customLabels: PAGINATE_LABELS,
+		populate: {
+			path: 'user',
+			select: 'name email phone role skills image'
+		}
 	}
 
 	// Query Filters
