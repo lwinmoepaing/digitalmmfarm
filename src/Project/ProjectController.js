@@ -359,3 +359,31 @@ module.exports.SET_PROJECT_CONTACT = async (req, res) => {
 		res.status(400).json(errorResponse(e))
 	}
 }
+
+/**
+ * GET Project For Farmers Dashboard
+ */
+module.exports.GET_FARMER_DASHBOARD_DATA = async (req, res) => {
+
+	const user = req.user._id
+
+	try {
+		const totalProject = await Project.count({user})
+		const totalPendingProjects = await Project.count({status: 'Pending', user})
+		const totalRejectProjects = await Project.count({status: 'Reject', user})
+		const totalExpiredProjects = await Project.count({status: 'Expired', user})
+		const totalWorkingProjects = await Project.count({status: 'Working', user})
+		const totalFinishedProjects = await Project.count({status: 'Finished', user})
+		const responseData = {
+			totalProject,
+			totalPendingProjects,
+			totalRejectProjects,
+			totalExpiredProjects,
+			totalWorkingProjects,
+			totalFinishedProjects
+		}
+		res.status(200).json(successResponse(responseData))
+	} catch (e) {
+		res.status(400).json(errorResponse(e))
+	}
+}
