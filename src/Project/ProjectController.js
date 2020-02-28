@@ -11,7 +11,7 @@ const { Project_Create_Validator, Project_Update_Validator } = require('./Projec
  */
 module.exports.GET_ALL_PROJECT = async (req, res) => {
 	const { page = 1 } = req.query
-	const limit = 10
+	const limit = 12
 	const options = {
 		// select: '_id title',
 		sort: { createdAt: -1 },
@@ -35,7 +35,7 @@ module.exports.GET_ALL_PROJECT = async (req, res) => {
 module.exports.GET_PROJECT_FROM_FARMERS_STATUS = async (req, res) => {
 	const { status = null } = await req.query
 	const { page = 1 } = req.query
-	const limit = 10
+	const limit = 12
 	const options = {
 		sort: { createdAt: -1 },
 		page,
@@ -62,7 +62,7 @@ module.exports.GET_PROJECT_FROM_FARMERS_STATUS = async (req, res) => {
 module.exports.GET_PROJECT_FROM_USERS_STATUS = async (req, res) => {
 	const { status = null } = await req.query
 	const { page = 1 } = req.query
-	const limit = 10
+	const limit = 12
 	const options = {
 		sort: { createdAt: -1 },
 		page,
@@ -96,7 +96,7 @@ module.exports.GET_PROJECT_BY_USER_ID = async (req, res) => {
 	}
 
 	const { page = 1 } = req.query
-	const limit = 10
+	const limit = 12
 	const options = {
 		sort: { createdAt: -1 },
 		page,
