@@ -16,7 +16,7 @@ module.exports.GET_ALL_USERS = async (req, res) => {
 	const { page = 1 } = req.query
 	const limit = 10
 	const options = {
-		select: '_id name email phone role skills',
+		select: '_id name email phone role skills image',
 		sort: { createdAt: -1 },
 		page,
 		limit,
@@ -88,7 +88,7 @@ module.exports.DELETE_USER_BY_ID = async (req, res) => {
  */
 module.exports.GET_USER_BY_ID = async (req, res) => {
 	try {
-		const user = await User.findById(req.params.id).select('_id name role skills')
+		const user = await User.findById(req.params.id).select('_id name role skills image')
 		if(!user) throw new Error ('User Not Found ')
 		res.status(200).json(successResponse(user))
 	} catch (e) {

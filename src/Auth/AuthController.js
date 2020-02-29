@@ -80,7 +80,7 @@ module.exports.LOGIN_USER = async (req, res) => {
 
 module.exports.GET_PROFILE_DATA = async (req, res) => {
 	try {
-		const user = await User.findOne({ email: req.user.email }).select('name email phone role skills')
+		const user = await User.findOne({ email: req.user.email }).select('name email phone role skills image')
 		if(!user) {
 			throw new Error ('User Not Found ')
 		}

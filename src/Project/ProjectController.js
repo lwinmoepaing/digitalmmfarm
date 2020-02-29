@@ -200,7 +200,7 @@ module.exports.GET_PROJECT_BY_ID = async (req, res) => {
 			.findById(req.params.id)
 			.populate({
 				path: 'user',
-				select: 'name email phone role skills'
+				select: 'name email phone role skills image'
 			})
 			.populate({
 				path: 'contactUsers',
