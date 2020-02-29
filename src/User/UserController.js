@@ -44,7 +44,12 @@ module.exports.UPDATE_USER_BY_ID = async (req, res) => {
 		const user = await User.findById(req.params.id)
 		if(!user) throw new Error ('User Not Found ')
 
-		const isCondition = user._id === req.user._id || req.user.role === 'Admin'
+
+		const isCondition =  DEEP_JSON_COPY(user._id) === DEEP_JSON_COPY(req.user._id) || req.user.role === 'Admin'
+
+		console.log('Find Id', user._id)
+		console.log('Req.USerId', req.user._id)
+
 		if(!isCondition) {
 			throw new Error('Not Allowed Authorized')
 		}
