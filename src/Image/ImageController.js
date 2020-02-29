@@ -1,5 +1,6 @@
 const Image = require('./ImageModel')
 const Project = require('../Project/ProjectModel')
+const User = require('../User/UserModel')
 
 const { errorResponse } = require('../../lib/responseHandler')
 const { PAGINATE_LABELS } = require('../../config')
@@ -52,6 +53,12 @@ module.exports.CREATE_IMAGE = async (req, res) => {
 		if(req.query.projectId) {
 			await Project.findByIdAndUpdate(req.query.projectId, {
 				headImg: imageFilePath
+			})
+		}
+
+		if(req.query.userId) {
+			await User.findByIdAndUpdate(req.query.userId, {
+				image: imageFilePath
 			})
 		}
 
