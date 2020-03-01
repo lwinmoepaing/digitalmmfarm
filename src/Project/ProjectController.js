@@ -204,15 +204,15 @@ module.exports.GET_PROJECT_BY_ID = async (req, res) => {
 			})
 			.populate({
 				path: 'contactUsers',
-				select: 'name email phone'
+				select: 'name email phone image role'
 			})
 			.populate({
 				path: 'assignedBy',
-				select: 'name email phone '
+				select: 'name email phone image role'
 			})
 			.populate({
 				path: 'acceptedBy',
-				select: 'name email phone'
+				select: 'name email phone image role'
 			})
 		if(!project) {
 			throw new Error('Not Found Project')
