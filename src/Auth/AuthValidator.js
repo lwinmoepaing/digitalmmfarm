@@ -19,8 +19,7 @@ const Auth_Register_Validator = ({ body }) => {
 			.required(),
 		password: Joi.string()
 			.min(6)
-			.required()
-		,
+			.required(),
 		phone: Joi.string()
 			.pattern(phRegex)
 			.required()
