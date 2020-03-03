@@ -1,4 +1,5 @@
 const Blog = require('./BlogModel')
+const { PAGINATE_LABELS } = require('../../config')
 const { successResponse, errorResponse } = require('../../lib/responseHandler')
 const { Blog_Create_Validator, Blog_Update_Validator } = require('./BlogValidator')
 const { MANAGE_ERROR_MESSAGE, IS_VALID_ID, DEEP_JSON_COPY} = require('../../lib/helper')
@@ -29,7 +30,6 @@ module.exports.CREATE_BLOG = async (req, res) => {
 /**
  * Edit Blog
  */
-
 module.exports.UPDATE_BLOG_BY_ID = async (req, res) => {
 	const { id = null } = req.params
 	const { error: idError } = IS_VALID_ID(id)
@@ -75,4 +75,26 @@ module.exports.UPDATE_BLOG_BY_ID = async (req, res) => {
 	}
 
 
+}
+
+/**
+ * Get All Blogs
+ */
+module.exports.GET_ALL_BLOG = async (req, res) => {
+	const { page = 1 } = req.query
+	const limit = 8
+	const options = {
+		// select: '_id title',
+		sort: { createdAt: -1 },
+		page,
+		limit,
+		customLabels: PAGINATE_LABELS
+	}
+
+	try {
+		const blogs = await Blog.paginate({}, options)
+		res.status(200).json(blogs)
+	} catch (e) {
+		res.status(400).json(errorResponse(e))
+	}
 }

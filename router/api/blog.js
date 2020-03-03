@@ -23,5 +23,9 @@ router.put('/:id',
 	BlogController.UPDATE_BLOG_BY_ID
 )
 
+/**
+ * Get ALl Blos
+ */
+router.get('/', BlogController.GET_ALL_BLOG)
 
 module.exports = router
