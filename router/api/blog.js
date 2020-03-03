@@ -15,4 +15,13 @@ router.post('/',
 	BlogController.CREATE_BLOG
 )
 
+/**
+ *
+ */
+router.put('/:id',
+	passport.authenticate('jwt', {session: false}),
+	BlogController.UPDATE_BLOG_BY_ID
+)
+
+
 module.exports = router
