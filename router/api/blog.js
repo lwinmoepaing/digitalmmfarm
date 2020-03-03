@@ -27,5 +27,9 @@ router.put('/:id',
  * Get ALl Blos
  */
 router.get('/', BlogController.GET_ALL_BLOG)
+router.get('/:id', BlogController.GET_BLOG_BY_ID)
+
+// Get Project By User Id
+router.get('/userId/:userId', BlogController.GET_BLOG_BY_USER_ID)
 
 module.exports = router

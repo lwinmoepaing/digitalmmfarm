@@ -98,3 +98,68 @@ module.exports.GET_ALL_BLOG = async (req, res) => {
 		res.status(400).json(errorResponse(e))
 	}
 }
+
+/**
+ * Get Blog By ID
+ */
+module.exports.GET_BLOG_BY_ID = async (req, res) => {
+	const { error } = IS_VALID_ID(req.params.id)
+
+	if (error) {
+		res.status(400).json(MANAGE_ERROR_MESSAGE(error))
+		return
+	}
+
+	try {
+		const blog = await Blog
+			.findById(req.params.id)
+			.populate({
+				path: 'author',
+				select: 'name email phone role skills image'
+			})
+
+		if(!blog) {
+			throw new Error('Not Found Blog')
+		}
+
+		res.status(200).json(successResponse(blog))
+	} catch (e) {
+		res.status(400).json(errorResponse(e))
+	}
+}
+
+/**
+ * Get Blog By User Id
+ */
+module.exports.GET_BLOG_BY_USER_ID = async (req, res) => {
+	const { userId = null } = req.params
+	const { error } = IS_VALID_ID(userId)
+
+	if (error) {
+		res.status(400).json(MANAGE_ERROR_MESSAGE(error))
+		return
+	}
+
+	const { page = 1 } = req.query
+	const limit = 8
+	const options = {
+		sort: { createdAt: -1 },
+		page,
+		limit,
+		customLabels: PAGINATE_LABELS,
+		populate: {
+			path: 'author',
+			select: 'name email phone role skills image'
+		}
+	}
+
+	// Query Filters
+	let query = { author: userId }
+	try {
+		const blog = await Blog.paginate(query, options)
+		res.status(200).json(blog)
+	} catch (e) {
+		res.status(400).json(errorResponse(e))
+	}
+
+}
