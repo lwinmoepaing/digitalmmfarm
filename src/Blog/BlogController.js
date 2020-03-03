@@ -16,7 +16,10 @@ module.exports.CREATE_BLOG = async (req, res) => {
 
 
 	try {
-		const blog = new Blog(req.body)
+		const blog = new Blog({
+			...req.body,
+			author: req.user._id
+		})
 		await blog.save()
 		res.status(200).json(successResponse(blog))
 	} catch (e) {

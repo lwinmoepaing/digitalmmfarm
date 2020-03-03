@@ -89,7 +89,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\": \"lwinmoepaing.dev@gmail.com\",\n\t\"password\": \"secret\"\n}",
+							"raw": "{\n\t\"email\": \"farmer@gmail.com\",\n\t\"password\": \"123456\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -320,9 +320,15 @@
 					"name": "GET Image By User Id",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "{{api_url}}/api/v1/image/user_id",
+							"raw": "{{api_url}}/api/v1/image/user",
 							"host": [
 								"{{api_url}}"
 							],
@@ -330,7 +336,7 @@
 								"api",
 								"v1",
 								"image",
-								"user_id"
+								"user"
 							]
 						}
 					},
@@ -362,7 +368,38 @@
 					"response": []
 				},
 				{
-					"name": "Get Farmers (Status)",
+					"name": "Get Project By User Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/api/v1/project/userId/5e515a5caa042410945e2610?status=Pending&projectCategory=Agriculture",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"project",
+								"userId",
+								"5e515a5caa042410945e2610"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "Pending"
+								},
+								{
+									"key": "projectCategory",
+									"value": "Agriculture"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get From Farmers (Status)",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -389,7 +426,7 @@
 					"response": []
 				},
 				{
-					"name": "Get Users (Status)",
+					"name": "Get From Users (Status)",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -454,7 +491,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"headImg\": \"/wallpaper/wallpaper.png\",\n\t\"title\": \"Farmer Two\",\n\t\"body\": [\"Famer 1 \", \"Farmer Param2\", \"FFFF Param3\"],\n\t\"projectDuration\": \"About 1 F month\",\n\t\"projectExpiredDate\": \"2020-02-29\",\n\t\"projectCategory\": \"AnimalHusbandry\"\n}",
+							"raw": "{\n\t\"headImg\": \"/wallpaper/wallpaper.jpg\",\n\t\"title\": \"Farmer Two\",\n\t\"body\": [\"Famer 1 \", \"Farmer Param2\", \"FFFF Param3\"],\n\t\"projectDuration\": \"About 1 F month\",\n\t\"projectExpiredDate\": \"2020-03-29\",\n\t\"projectCategory\": \"Both\",\n\t\"attachmentImg\": [\"/wallpaper/wallpaper.jpg\"]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -481,7 +518,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{api_url}}/api/v1/project/5e515c576ad7333358765c54",
+							"raw": "{{api_url}}/api/v1/project/5e516ef981fd7826c4b538ae",
 							"host": [
 								"{{api_url}}"
 							],
@@ -489,7 +526,48 @@
 								"api",
 								"v1",
 								"project",
-								"5e515c576ad7333358765c54"
+								"5e516ef981fd7826c4b538ae"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Project By Id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"Working\",\n    \"title\": \"Wahaha\",\n    \"acceptedBy\": \"5e515a2eaa042410945e260e\",\n    \"attachmentImg\": [\n        \"/wallpaper/wallpaper.png\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/api/v1/project/5e516ef981fd7826c4b538ae",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"project",
+								"5e516ef981fd7826c4b538ae"
 							]
 						}
 					},
@@ -499,7 +577,28 @@
 					"name": "Set Contact  Project(Id) by User(!Farmer)",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Farmer Two\",\n\t\"body\": [\"Famer 1 \", \"Farmer Param2\", \"FFFF Param3\"],\n\t\"projectDuration\": \"About 1 F month\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{api_url}}/api/v1/project/contact/5e51092538b94426805d4409",
 							"host": [
@@ -538,6 +637,116 @@
 								"project",
 								"interested",
 								"5e51092538b94426805d4409"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Staff Dasboard",
+			"item": [
+				{
+					"name": "Get Dashboard Data",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}/api/v1/farmer/dashboard",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"farmer",
+								"dashboard"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Farmer Dasboard",
+			"item": [
+				{
+					"name": "Get Dashboard Data",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}/api/v1/farmer/dashboard",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"farmer",
+								"dashboard"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Blog",
+			"item": [
+				{
+					"name": "Create Blog",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"headImg\": \"/wallpaper/wallpaper.jpg\",\n\t\"title\": \"Test Title\",\n\t\"body\": \"<h1>Hello World</h1>\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/api/v1/blog",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"blog"
 							]
 						}
 					},
