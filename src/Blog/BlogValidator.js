@@ -16,14 +16,11 @@ const Blog_Create_Validator = ({ body }) => {
 		body: Joi.string()
 			.trim(true)
 			.required(),
+		youtubeUrl: Joi.string().allow('', null),
+		youtubeCaption: Joi.string().allow('', null)
 	})
 
-	const validate = {
-		headImg: body.headImg,
-		title: body.title,
-		body: body.body
-	}
-	return schema.validate(validate, {abortEarly: false})
+	return schema.validate(body, {abortEarly: false})
 }
 
 module.exports.Blog_Create_Validator = Blog_Create_Validator

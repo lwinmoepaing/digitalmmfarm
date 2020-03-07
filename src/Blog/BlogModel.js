@@ -44,11 +44,11 @@ const blogSchema = new Schema({
 	comments: [messageShema],
 	youtubeUrl: {
 		type: String,
-		required: true,
+		default: ''
 	},
 	youtubeCaption: {
 		type: String,
-		required: true
+		default: ''
 	},
 	deletedAt: {
 		type: Date,
