@@ -88,7 +88,11 @@ module.exports.GET_ALL_BLOG = async (req, res) => {
 		sort: { createdAt: -1 },
 		page,
 		limit,
-		customLabels: PAGINATE_LABELS
+		customLabels: PAGINATE_LABELS,
+		populate: {
+			path: 'author',
+			select: 'name email phone role skills image'
+		}
 	}
 
 	try {
