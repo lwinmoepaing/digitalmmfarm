@@ -16,8 +16,8 @@ const Blog_Create_Validator = ({ body }) => {
 		body: Joi.string()
 			.trim(true)
 			.required(),
-		youtubeUrl: Joi.allow(null).allow('').string(),
-		youtubeCaption: Joi.allow(null).allow('').string()
+		youtubeUrl: Joi.allow('').string(),
+		youtubeCaption: Joi.allow('').string()
 	})
 
 	return schema.validate(body, {abortEarly: false})
