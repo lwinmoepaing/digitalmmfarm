@@ -42,6 +42,14 @@ const blogSchema = new Schema({
 		required: true,
 	},
 	comments: [messageShema],
+	youtubeUrl: {
+		type: String,
+		required: true,
+	},
+	youtubeCaption: {
+		type: String,
+		required: true
+	},
 	deletedAt: {
 		type: Date,
 		default: null,
